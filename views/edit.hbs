@@ -1,4 +1,4 @@
-<form action="/trackers/{{ tracker._id }}/edit" method="POST">
+<form action="/trackers/{{ tracker._id }}?_method=PUT" method="POST">
   <input type="text" placeholder="name" name="name" value="{{ tracker.name }}">
   <button type="submit">Save</button>
   <a href="/">back</a>
