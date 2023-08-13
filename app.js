@@ -48,6 +48,14 @@ app.post('/trackers', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/trackers/:id', (req, res) => {
+  const id = req.params.id
+  return Tracker.findById(id)
+    .lean()
+    .then((tracker) => res.render('detail', { tracker }))
+    .catch(error => console.log(error))
+})
+
 
 // 設定 port 3000
 app.listen(3000, () => {
