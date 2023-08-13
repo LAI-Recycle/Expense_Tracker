@@ -56,6 +56,25 @@ app.get('/trackers/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/trackers/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Tracker.findById(id)
+    .lean()
+    .then((tracker) => res.render('edit', { tracker }))
+    .catch(error => console.log(error))
+})
+
+app.post('/trackers/:id/edit', (req, res) => {
+  const id = req.params.id
+  const name = req.body.name
+  return Tracker.findById(id)
+    .then(tracker => {
+      tracker.name = name
+      return tracker.save()
+    })
+    .then(()=> res.redirect(`/trackers/${id}`))
+    .catch(error => console.log(error))
+})
 
 // 設定 port 3000
 app.listen(3000, () => {
