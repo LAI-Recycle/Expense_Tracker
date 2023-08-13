@@ -1,6 +1,7 @@
 <p>{{ tracker.name }}</p>
 <a href="/trackers/{{ tracker._id }}/edit">edit</a>
 <a href="/">back</a>
-<form action="/trackers/{{ todo._id }}?_method=DELETE" method="POST" style="display: inline;">
+<form action="/trackers/{{ tracker._id }}?_method=DELETE" method="POST" style="display: inline;">
   <button type="submit">delete</button>
 </form>
+
