@@ -6,40 +6,45 @@ router.get('/new', (req, res) => {
   return res.render('new')
 })
 router.post('/', (req, res) => {
+  const userId = req.user._id
   const name = req.body.name
-  return Tracker.create({ name })
+  return Tracker.create({ name, userId })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 router.get('/:id', (req, res) => {
-  const id = req.params.id
-  return Tracker.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Tracker.findOne({ _id, userId })
     .lean()
     .then(tracker => res.render('detail', { tracker }))
     .catch(error => console.log(error))
 })
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  return Tracker.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Tracker.findOne({ _id, userId })
     .lean()
     .then(tracker => res.render('edit', { tracker }))
     .catch(error => console.log(error))
 })
 router.put('/:id', (req, res) => {
-  const id = req.params.id
+  const userId = req.user._id
+  const _id = req.params.id
   const { name, isDone } = req.body
-  return Tracker.findById(id)
+  return Tracker.findOne({ _id, userId })
     .then(tracker => {
       tracker.name = name
       tracker.isDone = isDone === 'on'
       return tracker.save()
     })
-    .then(() => res.redirect(`/trackers/${id}`))
+    .then(() => res.redirect(`/trackers/${_id}`))
     .catch(error => console.log(error))
 })
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  return Tracker.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Tracker.findOne({ _id, userId })
     .then(tracker => tracker.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

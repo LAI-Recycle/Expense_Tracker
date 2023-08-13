@@ -4,9 +4,12 @@ const router = express.Router()
 // 引入
 const home = require('./modules/home')
 const trackers = require('./modules/trackers')
-// 將網址結構符合 / 字串的 request 導向 home 模組 
-router.use('/', home)
-router.use('/trackers', trackers )
+const users = require('./modules/users')
+const { authenticator } = require('../middleware/auth') 
+
+router.use('/trackers', authenticator, trackers )
+router.use('/users', users) 
+router.use('/', authenticator, home)
 
 // 匯出路由器
 module.exports = router
