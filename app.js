@@ -76,6 +76,14 @@ app.post('/trackers/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.post('/trackers/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Tracker.findById(id)
+    .then(tracker => tracker.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 // 設定 port 3000
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')
