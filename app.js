@@ -1,7 +1,8 @@
 // 載入 express 並建構應用程式伺服器
 const express = require('express')
 const mongoose = require('mongoose') // 載入 mongoose
-const exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars')
+const Tracker = require('./models/tracker')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -27,7 +28,10 @@ app.set('view engine', 'hbs')
 
 // 設定首頁路由
 app.get('/', (req, res) => {
-  res.render('index')
+  Tracker.find() // 取出 Tracker model 裡的所有資料
+    .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+    .then(trackers => res.render('index', { trackers })) // 將資料傳給 index 樣板
+    .catch(error => console.error(error)) // 錯誤處理
 })
 
 // 設定 port 3000
