@@ -1,6 +1,37 @@
-<form action="/trackers" method="POST" style="display: inline;">
-  <div class="input-group">
-    <input class="form-control" type="text" placeholder="name" name="name">
-    <button class="btn btn-success" type="submit">Create</button>
-  </div>
+<h1>請輸入你的支出</h1>
+{{> message}}
+<form action="/records/new" method="POST" style="display: inline;">
+      <div class="mb-3">
+        <label class="form-label" for="name">名稱:</label>
+        <input type="text" class="form-control" id="inputItem" name="name" value="{{name}}" placeholder="請輸入項目名稱" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="date" class="form-label">日期:</label>
+        <input type="date" class="form-control" name="date" id="inputDate" min="2023-01-01" max="2030-12-31" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="selectCategory">類別:</label>
+        <select class="form-select" id="category" name="category">
+          {{#if category}}
+          <option value="{{ category }}" selected>{{ category }}</option>
+          {{else}}
+          <option disabled selected>選擇一個類別</option>
+          {{/if}}
+          <option value="家居物業">家居物業</option>
+          <option value="交通出行">交通出行</option>
+          <option value="休閒娛樂">休閒娛樂</option>
+          <option value="餐飲食品">餐飲食品</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="inputAmount">金額:</label>
+        <input type="number" class="form-control" name="amount" id="inputAmount" placeholder="請輸入花費金額" value="{{amount}}" required />
+      </div>
+      
+      <hr>
+      <button class="btn btn-success" type="submit">新增支出</button>
 </form>

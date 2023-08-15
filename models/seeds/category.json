@@ -1,0 +1,22 @@
+[
+  { 
+    "name": "家居物業",
+    "image": "<i class='fa-solid fa-house'></i>"
+  },
+  {
+    "name": "交通出行",
+    "image": "<i class='fa-solid fa-van-shuttle'></i>"
+  },
+  {
+    "name": "休閒娛樂",
+    "image": "<i class='fa-solid fa-face-grin-beam'></i>"
+  },
+  {
+    "name": "餐飲食品",
+    "image": "<i class='fa-solid fa-utensils'></i>"
+  },
+  {
+    "name": "其他",
+    "image": "<i class='fa-solid fa-pen'></i>"
+  }
+]

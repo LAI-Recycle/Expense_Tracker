@@ -1,6 +1,32 @@
-<form action="/trackers/{{ tracker._id }}?_method=PUT" method="POST" style="display: inline;">
-  <div class="input-group">
-    <input class="form-control" type="text" placeholder="name" name="name" value="{{ tracker.name }}">
-    <button class="btn btn-success" type="submit">Save</button>
+<form action="/records/edit/{{recordId}}" method="POST" style="display: inline;">
+  <h1>修改你的支出</h1>
+  <div class="mb-3">
+    <label class="form-label" for="name">名稱:</label>
+    <input type="text" class="form-control" name="name" id="name" maxlength="10" placeholder="請輸入項目名稱" value="{{record.name}}"required />
   </div>
+
+  <div class="mb-3">
+    <label for="date" class="form-label">日期:</label>
+    <input type="date" class="form-control" name="date" id="date" min="2023-01-01" max="2030-12-31" value="{{record.date}}" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label" for="category">類別:</label>
+    <select class="form-select" id="category" name="category">
+      <option value="{{ record.category }}" selected>{{ record.category }}</option>
+      <option value="家居物業">家居物業</option>
+      <option value="交通出行">交通出行</option>
+      <option value="休閒娛樂">休閒娛樂</option>
+      <option value="餐飲食品">餐飲食品</option>
+      <option value="其他">其他</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label" for="amount">金額:</label>
+    <input type="number" class="form-control" name="amount" id="amount" placeholder="請輸入花費金額" value=""{{record.amount}}"" required />
+  </div>
+
+  <hr>
+  <button class="btn btn-success" type="submit">修改支出</button>
 </form>
